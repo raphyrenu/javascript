@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        option {
+            background-color: aqua;
+            color: blueviolet;
+        }
+    </style>
+    <title>Country Dropdown</title>
+</head>
+<body>
+
+<select id="countryDropdown">
+    <option value="">Select a country</option>
+</select>
+
+<script>
+    const countryDropdown = document.getElementById("countryDropdown");
+
+    // Fetch list of countries from REST Countries API
+    fetch("https://restcountries.com/v3.1/all")
+        .then(response => response.json())
+        .then(data => {
+            data.forEach(country => {
+                let option = document.createElement("option");
+                option.text = country.name.common;
+                option.value = country.name.common;
+                countryDropdown.appendChild(option);
+            });
+        })
+        .catch(error => console.error("Error fetching countries:", error));
+</script>
+
+</body>
+</html>
